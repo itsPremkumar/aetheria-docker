@@ -1,0 +1,107 @@
+version: "3.9"
+
+services:
+  healthcare:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-healthcare.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-healthcare
+    ports:
+      - "8001:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  education:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-education-kg.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-education
+    ports:
+      - "8002:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  finance:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-finance.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-finance
+    ports:
+      - "8003:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  legal:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-legal.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-legal
+    ports:
+      - "8004:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  agriculture:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-agriculture-kg.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-agriculture
+    ports:
+      - "8005:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  customer-service:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-customer-service.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-customer-service
+    ports:
+      - "8006:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+  manufacturing:
+    build:
+      context: https://github.com/itsPremkumar/aetheria-manufacturing.git#main
+      dockerfile: Dockerfile
+    container_name: aetheria-manufacturing
+    ports:
+      - "8007:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
