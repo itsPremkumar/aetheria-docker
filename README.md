@@ -2,6 +2,15 @@
 
 > Docker setup for all 7 Aetheria Knowledge Graphs
 
+## Status
+
+- **Test suite:** 13 test files, **280 test cases — all passing**, zero skips
+- **Last full run:** 2026-09-24 (see `docs/architecture.md` for the test taxonomy)
+- **Coverage:** static config validation, cross-file consistency, and live
+  functional tests of the embedded health endpoints
+- **Latest change:** restored full 7-service coverage by adding the missing
+  `Dockerfile.manufacturing` (16 previously-skipped tests now run and pass)
+
 ## Quick Start
 
 ```bash
@@ -42,6 +51,17 @@ curl http://localhost:8006/health
 curl http://localhost:8007/health
 ```
 
+Each endpoint responds `{"status": "healthy", "service": "<domain>"}`.
+
+## Running the tests
+
+The test suite is fully offline — no Docker daemon required, only Python +
+pytest + PyYAML:
+
+```bash
+python -m pytest tests/ -q
+```
+
 ## Architecture
 
 ```
@@ -54,3 +74,14 @@ curl http://localhost:8007/health
 │  manufacturing:8007                     │
 └─────────────────────────────────────────┘
 ```
+
+Each service is built from its own Dockerfile (`Dockerfile` for healthcare,
+`Dockerfile.<domain>` for the rest), which clones the domain KG repo at
+build time and serves a stdlib-only JSON health endpoint. Full design
+rationale and the test-suite taxonomy live in
+[docs/architecture.md](docs/architecture.md).
+
+## References
+
+- Part of the 8-domain Aetheria vertical AI KG initiative
+- Domain KG repositories: `itsPremkumar/aetheria-<domain>` on GitHub
